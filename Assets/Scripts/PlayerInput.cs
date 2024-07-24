@@ -6,8 +6,11 @@ using UnityEngine.EventSystems;
 public class PlayerInput : MonoBehaviour
 {
 
-    [SerializeField] private Transform firstObject;
-    [SerializeField] private Transform lastObject;
+
+    [SerializeField] private string word;
+    
+    [SerializeField] private Letter firstLetter;
+    [SerializeField] private Letter lastLetter;
     
     void Update()
     {
@@ -33,11 +36,43 @@ public class PlayerInput : MonoBehaviour
         {
             if (result.gameObject.TryGetComponent(out Letter letter))
             {
+                if (letter.GetClickedStatus()) return;
                 Debug.Log("Hit: " + result.gameObject.name);
-                if (!firstObject) firstObject = result.gameObject.transform;
+                if (!firstLetter) firstLetter = letter;
 
-                lastObject = result.gameObject.transform;
+                lastLetter = letter;
                 letter.SetClicked();
+                char letterValue = letter.GetValue();
+                word += letterValue;
+                
+                letter.SetClicked();
+
+                Vector2 firstLetterPositions =
+                    firstLetter.gameObject.GetComponent<LetterGridPosition>().GetGridPosition();
+                Vector2 lastLetterPositions =
+                    lastLetter.gameObject.GetComponent<LetterGridPosition>().GetGridPosition();;
+
+                float xDiff = Mathf.Abs(firstLetterPositions.x - lastLetterPositions.x);
+                float yDiff = Mathf.Abs(firstLetterPositions.y - lastLetterPositions.y);
+
+                if (xDiff == 1 && yDiff == 0)
+                {
+                    Debug.Log("The positions are side by side horizontally.");
+                }
+                else if (xDiff == 0 && yDiff == 1)
+                {
+                    Debug.Log("The positions are side by side vertically.");
+                }
+                else if (xDiff == 1 && yDiff == 1)
+                {
+                    Debug.Log("The positions are diagonally adjacent.");
+                }
+                else
+                {
+                    Debug.Log("The positions are not adjacent.");
+                }
+                
+                
             }
         }
         
