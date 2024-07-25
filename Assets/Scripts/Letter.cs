@@ -16,13 +16,18 @@ public class Letter : MonoBehaviour
 
     private void Start()
     {
-        SetRandomLetter();
+        // SetRandomLetter();
     }
 
     public void SetClicked()
     {
         isClicked = true;
         letterBackground.color = Color.red;
+    }
+
+    public void SetLetter(char newChar)
+    {
+        letterText.text = newChar.ToString();
     }
 
     public bool GetClickedStatus()
@@ -35,9 +40,10 @@ public class Letter : MonoBehaviour
         letterChar = (char)('A' + Random.Range(0, 26));
         letterText.text = letterChar.ToString();
     }
-
-    public char GetValue()
+    
+    public char GetLetter()
     {
+        // Debug.LogError("Char is  " + letterChar);
         return letterChar;
     }
 }

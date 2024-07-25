@@ -27,6 +27,8 @@ public class PlayerInput : MonoBehaviour
     }
 
     [SerializeField] private InputDirection currentInputDirection;
+
+
     
     void Update()
     {
@@ -74,7 +76,7 @@ public class PlayerInput : MonoBehaviour
 
                 lastLetter = letter;
                 letter.SetClicked();
-                char letterValue = letter.GetValue();
+                char letterValue = letter.GetLetter();
                 word += letterValue;
                 
                 clickedLetters.Add(letter);
