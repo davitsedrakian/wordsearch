@@ -17,10 +17,9 @@ public class GridGenerator : MonoBehaviour
     private GameObject[,] gridObjects;
     
     private void Start()
-    
     {
-        GenerateGrid();
-        PlaceWordsInGrid();
+        // GenerateGrid();
+        // PlaceWordsInGrid();
     }
 
     [ContextMenu("Create Grid")]
@@ -47,43 +46,96 @@ public class GridGenerator : MonoBehaviour
         Debug.Log(gridObjects.Length);
     }
 
-    public void PlaceWordsInGrid()
+
+    public void GenerateGrid(ArrayLayout rowData)
     {
-        foreach (string word in levelWords)
+        gridHeight = gridWidth = rowData.rows.Length;
+        gridObjects = new GameObject[gridHeight, gridWidth];
+        
+        float totalWidth = (gridWidth - 1) * gridStep;
+        float totalHeight = (gridHeight - 1) * gridStep;
+        Vector3 startPosition = new Vector3(-totalWidth / 2, -totalHeight / 2, 0);
+        //
+        //
+        for (int i = 0; i < gridHeight; i++)
         {
-            char[] characters = WordToChar(word);
-            Debug.LogError($"Word is {word}");
-            bool placed = false;
-
-            // Try to place the word horizontally, vertically, or diagonally
-            for (int i = 0; i < gridHeight && !placed; i++)
+            for (int j = 0; j < gridWidth; j++)
             {
-                for (int j = 0; j < gridWidth && !placed; j++)
-                {
-                    if (CanPlaceWordHorizontally(i, j, characters.Length))
-                    {
-                        PlaceWordHorizontally(i, j, characters);
-                        placed = true;
-                    }
-                    else if (CanPlaceWordVertically(i, j, characters.Length))
-                    {
-                        PlaceWordVertically(i, j, characters);
-                        placed = true;
-                    }
-                    else if (CanPlaceWordDiagonally(i, j, characters.Length))
-                    {
-                        PlaceWordDiagonally(i, j, characters);
-                        placed = true;
-                    }
-                }
-            }
-
-            if (!placed)
-            {
-                Debug.LogWarning("Could not place word: " + word);
+                Vector3 position = startPosition + new Vector3(j * gridStep, i * gridStep, 0);
+                GameObject newObject = Instantiate(gridObject, position, Quaternion.identity, gridParent);
+                newObject.GetComponent<LetterGridPosition>().SetGridPosition(new Vector2(i, j));
+                newObject.GetComponent<Letter>().SetLetter(rowData.rows[gridHeight-1-i].row[j]);
+                gridObjects[i, j] = newObject;
             }
         }
+        
+        // for (int i = 0; i < gridHeight; i++)
+        // {
+        //     for (int j = gridWidth-1; j >= 0; j--)
+        //     {
+        //         Vector3 position = startPosition + new Vector3(j * gridStep, i * gridStep, 0);
+        //         GameObject newObject = Instantiate(gridObject, position, Quaternion.identity, gridParent);
+        //         newObject.GetComponent<LetterGridPosition>().SetGridPosition(new Vector2(i, j));
+        //         newObject.GetComponent<Letter>().SetLetter(rowData.rows[i].row[j]);
+        //         gridObjects[i, j] = newObject;
+        //     }
+        // }
+        
+        // for (int i = gridHeight - 1; i >= 0; i--)
+        // {
+        //     for (int j = 0; j < gridWidth; j++)
+        //     {
+        //         Vector3 position = startPosition + new Vector3(j * gridStep, i * gridStep, 0);
+        //         GameObject newObject = Instantiate(gridObject, position, Quaternion.identity, gridParent);
+        //         newObject.GetComponent<LetterGridPosition>().SetGridPosition(new Vector2(i, j));
+        //         newObject.GetComponent<Letter>().SetLetter(rowData.rows[i].row[j]);
+        //         gridObjects[i, j] = newObject;
+        //     }
+        // }
+
+        Debug.Log(gridObjects.Length);
+        
+        
+        
     }
+    
+    // public void PlaceWordsInGrid()
+    // {
+    //     foreach (string word in levelWords)
+    //     {
+    //         char[] characters = WordToChar(word);
+    //         Debug.LogError($"Word is {word}");
+    //         bool placed = false;
+    //
+    //         // Try to place the word horizontally, vertically, or diagonally
+    //         for (int i = 0; i < gridHeight && !placed; i++)
+    //         {
+    //             for (int j = 0; j < gridWidth && !placed; j++)
+    //             {
+    //                 if (CanPlaceWordHorizontally(i, j, characters.Length))
+    //                 {
+    //                     PlaceWordHorizontally(i, j, characters);
+    //                     placed = true;
+    //                 }
+    //                 else if (CanPlaceWordVertically(i, j, characters.Length))
+    //                 {
+    //                     PlaceWordVertically(i, j, characters);
+    //                     placed = true;
+    //                 }
+    //                 else if (CanPlaceWordDiagonally(i, j, characters.Length))
+    //                 {
+    //                     PlaceWordDiagonally(i, j, characters);
+    //                     placed = true;
+    //                 }
+    //             }
+    //         }
+    //
+    //         if (!placed)
+    //         {
+    //             Debug.LogWarning("Could not place word: " + word);
+    //         }
+    //     }
+    // }
 
     public char[] WordToChar(string word)
     {

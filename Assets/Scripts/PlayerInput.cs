@@ -13,6 +13,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private Letter lastLetter;
     [SerializeField] private List<Letter> clickedLetters;
 
+    [SerializeField] private LevelManager levelManager;
+
     private enum InputDirection
     {
         None,
@@ -40,6 +42,17 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             //reset all
+            currentInputDirection = InputDirection.None;
+            firstLetter = null;
+            lastLetter = null;
+            word = null;
+
+            for (int i = 0; i < clickedLetters.Count; i++)
+            {
+                clickedLetters[i].SetDefault();
+            }
+            
+            clickedLetters.Clear();
         }
     }
 
@@ -81,6 +94,17 @@ public class PlayerInput : MonoBehaviour
                 
                 clickedLetters.Add(letter);
                 letter.SetClicked();
+                
+                bool isCompleted = levelManager.CompareWords(word);
+
+                if (isCompleted)
+                {
+                    for (int i = 0; i < clickedLetters.Count; i++)
+                    {
+                        clickedLetters[i].SetCompleted();
+                    }
+                    clickedLetters.Clear();
+                }
 
                 if (currentInputDirection == InputDirection.None)
                 {

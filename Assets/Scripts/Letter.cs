@@ -24,10 +24,19 @@ public class Letter : MonoBehaviour
         isClicked = true;
         letterBackground.color = Color.red;
     }
+    
+    public void SetCompleted()
+    {
+        // isClicked = true;
+        letterBackground.color = Color.green;
+    }
+
 
     public void SetLetter(char newChar)
     {
         letterText.text = newChar.ToString();
+        letterChar = newChar;
+
     }
 
     public bool GetClickedStatus()
@@ -45,5 +54,11 @@ public class Letter : MonoBehaviour
     {
         // Debug.LogError("Char is  " + letterChar);
         return letterChar;
+    }
+
+    public void SetDefault()
+    {
+        isClicked = false;
+        letterBackground.color = Color.white;
     }
 }

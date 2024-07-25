@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level", order = 1)]
-public class LevelWords : ScriptableObject
+public class LevelWordsSO : ScriptableObject
 {
     public ArrayLayout data;
+
+    [SerializeField] private string[] levelTargetNames;
     
     
+    [Button]
     public void GetRowData()
     {
         for (int i = 0; i < data.rows.Length; i++)
@@ -19,7 +23,13 @@ public class LevelWords : ScriptableObject
             }
         }
     }
+
+    public string[] GetLevelWords()
+    {
+        return levelTargetNames;
+    }
     
+    [Button]
     public void FillEmptyCells()
     {
         for (int i = 0; i < data.rows.Length; i++)
