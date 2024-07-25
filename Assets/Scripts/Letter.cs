@@ -9,11 +9,21 @@ using Random = UnityEngine.Random;
 public class Letter : MonoBehaviour
 {
     [SerializeField] private bool isClicked;
+    [SerializeField] private bool isCompleted;
     [SerializeField] private Image letterBackground;
     [SerializeField] private TextMeshProUGUI letterText;
     [SerializeField] private char letterChar;
 
 
+    // private enum LetterState
+    // {
+    //     Default,
+    //     Clicked,
+    //     Completed
+    // }
+
+    // private LetterState currentState;
+    
     private void Start()
     {
         // SetRandomLetter();
@@ -22,12 +32,15 @@ public class Letter : MonoBehaviour
     public void SetClicked()
     {
         isClicked = true;
+        // currentState = LetterState.Clicked;
         letterBackground.color = Color.red;
     }
     
     public void SetCompleted()
     {
         isClicked = false;
+        isCompleted = true;
+        // currentState = LetterState.Completed;
         letterBackground.color = Color.green;
     }
 
@@ -58,7 +71,17 @@ public class Letter : MonoBehaviour
 
     public void SetDefault()
     {
+        if (isCompleted)
+        {
+            letterBackground.color = Color.green;
+        }
+        else
+        {
+            letterBackground.color = Color.white;
+        }
+        
         isClicked = false;
-        letterBackground.color = Color.white;
+        // currentState = LetterState.Default;
+       
     }
 }

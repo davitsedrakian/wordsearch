@@ -95,6 +95,8 @@ public class PlayerInput : MonoBehaviour
                 clickedLetters.Add(letter);
                 letter.SetClicked();
                 
+                levelManager.PlayPopSound();
+                
                 bool isCompleted = levelManager.CompareWords(word);
 
                 if (isCompleted)
@@ -102,6 +104,7 @@ public class PlayerInput : MonoBehaviour
                     for (int i = 0; i < clickedLetters.Count; i++)
                     {
                         clickedLetters[i].SetCompleted();
+                        // levelManager.pla
                     }
                     clickedLetters.Clear();
                 }
