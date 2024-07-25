@@ -27,7 +27,7 @@ public class Letter : MonoBehaviour
     
     public void SetCompleted()
     {
-        // isClicked = true;
+        isClicked = false;
         letterBackground.color = Color.green;
     }
 

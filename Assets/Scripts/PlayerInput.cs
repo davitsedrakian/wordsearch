@@ -76,8 +76,8 @@ public class PlayerInput : MonoBehaviour
 
                 if (firstLetter && lastLetter && firstLetter != lastLetter)
                 {
-                    InputDirection mewDirection = GetDirection(lastLetter.transform.position, letter.transform.position);
-                    if (mewDirection != currentInputDirection)
+                    InputDirection newDirection = GetDirection(lastLetter.transform.position, letter.transform.position);
+                    if (newDirection != currentInputDirection)
                     {
                         return;
                     }
