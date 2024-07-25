@@ -11,12 +11,33 @@ public class PlayerInput : MonoBehaviour
     
     [SerializeField] private Letter firstLetter;
     [SerializeField] private Letter lastLetter;
+    [SerializeField] private List<Letter> clickedLetters;
+
+    private enum InputDirection
+    {
+        None,
+        Up,
+        Down,
+        Left,
+        Right,
+        RightUp,
+        RightDown,
+        LeftDown,
+        LeftUp
+    }
+
+    [SerializeField] private InputDirection currentInputDirection;
     
     void Update()
     {
-        if (Input.GetMouseButton(0)) // Check if the left mouse button is held down
+        if (Input.GetMouseButton(0))
         {
             RaycastToUI();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            //reset all
         }
     }
 
@@ -37,6 +58,17 @@ public class PlayerInput : MonoBehaviour
             if (result.gameObject.TryGetComponent(out Letter letter))
             {
                 if (letter.GetClickedStatus()) return;
+
+                if (firstLetter && lastLetter && firstLetter != lastLetter)
+                {
+                    InputDirection mewDirection = GetDirection(lastLetter.transform.position, letter.transform.position);
+                    if (mewDirection != currentInputDirection)
+                    {
+                        return;
+                    }
+                }
+               
+                
                 Debug.Log("Hit: " + result.gameObject.name);
                 if (!firstLetter) firstLetter = letter;
 
@@ -45,37 +77,51 @@ public class PlayerInput : MonoBehaviour
                 char letterValue = letter.GetValue();
                 word += letterValue;
                 
+                clickedLetters.Add(letter);
                 letter.SetClicked();
 
-                Vector2 firstLetterPositions =
-                    firstLetter.gameObject.GetComponent<LetterGridPosition>().GetGridPosition();
-                Vector2 lastLetterPositions =
-                    lastLetter.gameObject.GetComponent<LetterGridPosition>().GetGridPosition();;
-
-                float xDiff = Mathf.Abs(firstLetterPositions.x - lastLetterPositions.x);
-                float yDiff = Mathf.Abs(firstLetterPositions.y - lastLetterPositions.y);
-
-                if (xDiff == 1 && yDiff == 0)
+                if (currentInputDirection == InputDirection.None)
                 {
-                    Debug.Log("The positions are side by side horizontally.");
+                    InputDirection direction = GetDirection(firstLetter.transform.position, letter.transform.position);
+                    currentInputDirection = direction;
                 }
-                else if (xDiff == 0 && yDiff == 1)
-                {
-                    Debug.Log("The positions are side by side vertically.");
-                }
-                else if (xDiff == 1 && yDiff == 1)
-                {
-                    Debug.Log("The positions are diagonally adjacent.");
-                }
-                else
-                {
-                    Debug.Log("The positions are not adjacent.");
-                }
-                
                 
             }
         }
         
        
+    }
+    
+    private InputDirection GetDirection(Vector3 from, Vector3 to)
+    {
+        Vector3 direction = (to - from).normalized;
+
+        if (direction == Vector3.zero)
+            return InputDirection.None;
+
+        if (Mathf.Approximately(direction.x, 0))
+        {
+            if (direction.y > 0)
+                return InputDirection.Up;
+            else if (direction.y < 0)
+                return InputDirection.Down;
+        }
+        else if (Mathf.Approximately(direction.y, 0))
+        {
+            if (direction.x > 0)
+                return InputDirection.Right;
+            else if (direction.x < 0)
+                return InputDirection.Left;
+        }
+        else if (direction.x > 0 && direction.y > 0)
+            return InputDirection.RightUp;
+        else if (direction.x > 0 && direction.y < 0)
+            return InputDirection.RightDown;
+        else if (direction.x < 0 && direction.y < 0)
+            return InputDirection.LeftDown;
+        else if (direction.x < 0 && direction.y > 0)
+            return InputDirection.LeftUp;
+
+        return InputDirection.None;
     }
 }
