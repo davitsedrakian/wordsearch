@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +34,8 @@ public class Letter : MonoBehaviour
     {
         isClicked = true;
         // currentState = LetterState.Clicked;
-        letterBackground.color = Color.red;
+        letterBackground.color = new Color32(143, 81, 237,255);
+        Bounce();
     }
     
     public void SetCompleted()
@@ -41,7 +43,8 @@ public class Letter : MonoBehaviour
         isClicked = false;
         isCompleted = true;
         // currentState = LetterState.Completed;
-        letterBackground.color = Color.green;
+        letterBackground.color = new Color32(122, 235, 124,255);
+        Bounce();
     }
 
 
@@ -73,7 +76,7 @@ public class Letter : MonoBehaviour
     {
         if (isCompleted)
         {
-            letterBackground.color = Color.green;
+            letterBackground.color = new Color32(122, 235, 124,255);
         }
         else
         {
@@ -83,5 +86,18 @@ public class Letter : MonoBehaviour
         isClicked = false;
         // currentState = LetterState.Default;
        
+    }
+    
+    void Bounce()
+    {
+        Sequence bounceSequence = DOTween.Sequence()
+            .Append(transform.DOScale(1.2f, 0.2f))
+            .Append(transform.DOScale(0.95f, 0.2f))
+            .Append(transform.DOScale(1f, 0.2f));
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
     }
 }

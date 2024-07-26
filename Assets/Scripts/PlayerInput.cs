@@ -84,7 +84,6 @@ public class PlayerInput : MonoBehaviour
                 }
                
                 
-                Debug.Log("Hit: " + result.gameObject.name);
                 if (!firstLetter) firstLetter = letter;
 
                 lastLetter = letter;

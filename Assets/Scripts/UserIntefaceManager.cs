@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,10 @@ public class UserIntefaceManager : MonoBehaviour
     [SerializeField] private WinCanvas winCanvas;
     [SerializeField] private LoseCanvas loseCanvas;
 
-
+    private void Start()
+    {
+        // menuCanvas.GetComponent<Canvas>().enabled = true;
+    }
 
     public void InitializeGameplayCanvas(string[] words)
     {
@@ -29,6 +33,11 @@ public class UserIntefaceManager : MonoBehaviour
         menuCanvas.enabled = false;
         
         winCanvas.ChangState(true);
-        Debug.LogError("Win canvas show");
+    }
+
+    public void ShowGameplayCanvas()
+    {
+        menuCanvas.gameObject.SetActive(false);
+        gameCanvas.gameObject.SetActive(true);
     }
 }

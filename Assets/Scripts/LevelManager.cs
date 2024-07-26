@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Smashlab.Pattern;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
 
     [SerializeField] private UserIntefaceManager userIntefaceManager;
@@ -15,23 +16,28 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private string[] levelWords;
     [SerializeField] private int wordCount;
-
-    private void Start()
-    {
-        CreateLevel();
-    }
+    [SerializeField] private int level;
 
     public void CreateLevel()
     {
+        userIntefaceManager.ShowGameplayCanvas();
         GenerateGrid();
     }
 
     [Button]
     public void GenerateGrid()
     {
-        levelWords = levelWordsSO[0].GetLevelWords();
+
+        level = PlayerPrefs.GetInt("level_number", 0);
+        
+        if (level >= levelWordsSO.Length)
+        {
+            level -= levelWordsSO.Length;
+        }
+        
+        levelWords = levelWordsSO[level].GetLevelWords();
         wordCount = levelWords.Length;
-        ArrayLayout data = levelWordsSO[0].data;
+        ArrayLayout data = levelWordsSO[level].data;
         gridGenerator.GenerateGrid(data);
         
         userIntefaceManager.InitializeGameplayCanvas(levelWords);
@@ -60,6 +66,8 @@ public class LevelManager : MonoBehaviour
     public void LevelPassed()
     {
         userIntefaceManager.ShowWinCanvas();
+        level++;
+        PlayerPrefs.SetInt("level_number",level);
     }
 
     public void PlayPopSound()

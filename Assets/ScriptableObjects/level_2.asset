@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a433b6584e38f4fe8b3abb9502a49147, type: 3}
-  m_Name: level_1
+  m_Name: level_2
   m_EditorClassIdentifier: 
   data:
     rows:
-    - row: 44004f0047004700540059005400
-    - row: 41004c0048004f004e0041005000
-    - row: 5600420045004b00300045004f00
-    - row: 43004100520049004d004c004b00
-    - row: 440056004f00450044004c004d00
-    - row: 4600440053004f00500030004e00
-    - row: 5300530054005900560052005400
+    - row: 4400410046004700540041005400
+    - row: 41004c0059004f004e004e005000
+    - row: 56004a0055004d00500049004f00
+    - row: 49004200460049004d004d004b00
+    - row: 4400560046004500440041004d00
+    - row: 46004b0049004e0047004c004e00
+    - row: 4d0041004300480049004e004500
   levelTargetNames:
-  - CAR
-  - DOG
-  - HERO
+  - JUMP
+  - MACHINE
+  - ANIMAL
+  - KING

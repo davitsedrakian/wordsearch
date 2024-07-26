@@ -8,12 +8,11 @@ public class WinCanvas : MonoBehaviour
 
    public void ChangState(bool state)
    {
-      GetComponent<Canvas>().enabled = state;
+      gameObject.SetActive(state);
    }
    
    public void ContinueButtonInteraction()
    {
-      Debug.LogError("Continue button clicked");
-      SceneManager.LoadScene(0);
+      SceneManager.LoadSceneAsync(0);
    }
 }

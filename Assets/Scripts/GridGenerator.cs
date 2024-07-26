@@ -41,7 +41,6 @@ public class GridGenerator : MonoBehaviour
             }
         }
         
-        Debug.Log(gridObjects.Length);
     }
     
     
