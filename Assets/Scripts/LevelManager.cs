@@ -66,7 +66,7 @@ public class LevelManager : Singleton<LevelManager>
 
         return false;
     }
-
+    [Button]
     public void LevelPassed()
     {
         userIntefaceManager.ShowWinCanvas();
@@ -74,15 +74,16 @@ public class LevelManager : Singleton<LevelManager>
         PlayerPrefs.SetInt("level_number",level);
         playerInput.enabled = false;
     }
-
-    public void PlayPopSound()
-    {
-        soundManager.PlayPopSound();
-    }
-
+    
+    [Button]
     public void LevelFailed()
     {
         userIntefaceManager.ShowLoseCanvas();
         playerInput.enabled = false;
+    }
+    
+    public void PlayPopSound()
+    {
+        soundManager.PlayPopSound();
     }
 }

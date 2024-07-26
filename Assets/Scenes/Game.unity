@@ -2392,7 +2392,7 @@ MonoBehaviour:
   userIntefaceManager: {fileID: 1773273417}
   soundManager: {fileID: 2024537942}
   countDownTimer: {fileID: 1457197751}
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 175814958}
   levelWordsSO:
   - {fileID: 11400000, guid: a053c11c6467842ee93b09b26492b573, type: 2}
   - {fileID: 11400000, guid: 07c806e375bd849daac7d59eca7c8f1a, type: 2}
