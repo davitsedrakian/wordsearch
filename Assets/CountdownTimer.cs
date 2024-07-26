@@ -7,11 +7,12 @@ public class CountdownTimer : MonoBehaviour
     public TextMeshProUGUI timerText;
     private float timeRemaining;
     private bool timerIsRunning = false;
+    [SerializeField] private int countdownTime;
     
     [Button]
     public void StartTimer()
     {
-        ResetTimer(120);
+        ResetTimer(countdownTime);
         timerIsRunning = true;
     }
 
@@ -43,7 +44,7 @@ public class CountdownTimer : MonoBehaviour
 
     void OnTimerEnd()
     {
-        Debug.Log("Timer has ended!");
+        LevelManager.instance.LevelFailed();
     }
 
     public void ResetTimer(float newTimeInSeconds)

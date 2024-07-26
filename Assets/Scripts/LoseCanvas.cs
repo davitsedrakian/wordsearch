@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LoseCanvas : MonoBehaviour
 {
-
     public void TryAgainButtonInteraction()
     {
         SceneManager.LoadScene(0);

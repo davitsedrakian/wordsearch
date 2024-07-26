@@ -10,6 +10,8 @@ public class LevelManager : Singleton<LevelManager>
 
     [SerializeField] private UserIntefaceManager userIntefaceManager;
     [SerializeField] private SoundManager soundManager;
+    [SerializeField] private CountdownTimer countDownTimer;
+    [SerializeField] private PlayerInput playerInput;
     
     [SerializeField] private LevelWordsSO[] levelWordsSO;
 
@@ -22,6 +24,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         userIntefaceManager.ShowGameplayCanvas();
         GenerateGrid();
+        countDownTimer.StartTimer();
+        playerInput.enabled = true;
     }
 
     [Button]
@@ -68,10 +72,17 @@ public class LevelManager : Singleton<LevelManager>
         userIntefaceManager.ShowWinCanvas();
         level++;
         PlayerPrefs.SetInt("level_number",level);
+        playerInput.enabled = false;
     }
 
     public void PlayPopSound()
     {
         soundManager.PlayPopSound();
+    }
+
+    public void LevelFailed()
+    {
+        userIntefaceManager.ShowLoseCanvas();
+        playerInput.enabled = false;
     }
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a433b6584e38f4fe8b3abb9502a49147, type: 3}
+  m_Name: level_3
+  m_EditorClassIdentifier: 
+  data:
+    rows:
+    - row: 4d0041004600470054004b005400
+    - row: 4100410059004f004e0049005000
+    - row: 56004a004e004d00500044004f00
+    - row: 49004200460049004d004d004b00
+    - row: 57004f004d0041004e0041004d00
+    - row: 46004b0049004e0047004c004e00
+    - row: 4d00410045004c00440045005200
+  levelTargetNames:
+  - MAN
+  - WOMAN
+  - KID
+  - ELDER

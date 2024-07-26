@@ -32,12 +32,20 @@ public class UserIntefaceManager : MonoBehaviour
         gameCanvas.enabled = false;
         menuCanvas.enabled = false;
         
-        winCanvas.ChangState(true);
+        winCanvas.gameObject.SetActive(true);
     }
 
     public void ShowGameplayCanvas()
     {
         menuCanvas.gameObject.SetActive(false);
         gameCanvas.gameObject.SetActive(true);
+    }
+
+    public void ShowLoseCanvas()
+    {
+        gameCanvas.enabled = false;
+        menuCanvas.enabled = false;
+        
+        loseCanvas.gameObject.SetActive(true);
     }
 }
