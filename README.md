@@ -1,3 +1,4 @@
+Please Use Unity Version 2022.3.36f1 in order for project to work properly
 This is a demo project for popular WordSearch game
 To Create a new level please click Assets -> Create -> ScriptableObjects -> Level
 
