@@ -15,25 +15,11 @@ public class Letter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI letterText;
     [SerializeField] private char letterChar;
 
-
-    // private enum LetterState
-    // {
-    //     Default,
-    //     Clicked,
-    //     Completed
-    // }
-
-    // private LetterState currentState;
     
-    private void Start()
-    {
-        // SetRandomLetter();
-    }
 
     public void SetClicked()
     {
         isClicked = true;
-        // currentState = LetterState.Clicked;
         letterBackground.color = new Color32(143, 81, 237,255);
         Bounce();
     }
@@ -42,7 +28,6 @@ public class Letter : MonoBehaviour
     {
         isClicked = false;
         isCompleted = true;
-        // currentState = LetterState.Completed;
         letterBackground.color = new Color32(122, 235, 124,255);
         Bounce();
     }
@@ -68,7 +53,6 @@ public class Letter : MonoBehaviour
     
     public char GetLetter()
     {
-        // Debug.LogError("Char is  " + letterChar);
         return letterChar;
     }
 
@@ -84,7 +68,6 @@ public class Letter : MonoBehaviour
         }
         
         isClicked = false;
-        // currentState = LetterState.Default;
        
     }
     

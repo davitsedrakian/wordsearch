@@ -18,7 +18,7 @@ public class InputSlideDetector : MonoBehaviour
     public SlideDirection currentSlideDirection = SlideDirection.None;
     private Vector3 startMousePosition;
     private Vector3 currentMousePosition;
-    public float slideThreshold = 50f; // Minimum distance to consider a slide
+    public float slideThreshold = 50f;
 
     void Update()
     {
@@ -79,11 +79,9 @@ public class InputSlideDetector : MonoBehaviour
             {
                 currentSlideDirection = SlideDirection.RightDown;
             }
-
-            // Update the start position to the current position to detect continuous sliding
+            
             startMousePosition = currentMousePosition;
         }
-
-        Debug.Log("Slide Direction: " + currentSlideDirection);
+        
      }
 }

@@ -103,7 +103,6 @@ public class PlayerInput : MonoBehaviour
                     for (int i = 0; i < clickedLetters.Count; i++)
                     {
                         clickedLetters[i].SetCompleted();
-                        // levelManager.pla
                     }
                     clickedLetters.Clear();
                 }

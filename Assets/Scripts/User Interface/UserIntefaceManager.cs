@@ -11,11 +11,7 @@ public class UserIntefaceManager : MonoBehaviour
     
     [SerializeField] private WinCanvas winCanvas;
     [SerializeField] private LoseCanvas loseCanvas;
-
-    private void Start()
-    {
-        // menuCanvas.GetComponent<Canvas>().enabled = true;
-    }
+    
 
     public void InitializeGameplayCanvas(string[] words)
     {
